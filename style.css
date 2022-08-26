@@ -1,0 +1,9 @@
+.container {
+    max-width: 200px;
+
+}
+
+.display {
+    border: 1px solid gray;
+    background-color: aliceblue;
+}
