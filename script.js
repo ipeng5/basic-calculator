@@ -1,7 +1,7 @@
 const numBtns = document.querySelectorAll(".num-button");
 const opBtns = document.querySelectorAll(".op-button");
 const equalBtn = document.querySelector(".equal-button");
-const acBtn = document.querySelector("ac-button");
+const acBtn = document.querySelector(".ac-button");
 const delBtn = document.querySelector(".del-button");
 let upScreen = document.querySelector("#upper-screen")
 let currScreen = document.querySelector("#current-screen")
@@ -10,8 +10,6 @@ let num2;
 let currResult = "";
 let upResult = "";
 let opSign;
-
-
 
 // appendNum(num) - when click a number, it adds to the current screen
 numBtns.forEach(numBtn => {
@@ -28,6 +26,7 @@ opBtns.forEach(opBtn => {
     opBtn.addEventListener("click", chooseOp);
 })
 function chooseOp(e) {
+    if (currResult === "") return;
     if (upResult !== "") {
         compute();
     }
@@ -36,13 +35,6 @@ function chooseOp(e) {
     currResult = "";
     opSign = e.target.value;
     updateDisplay()
-}
-
-// update display
-function updateDisplay() {
-    currScreen.textContent = currResult;
-    upScreen.textContent = upResult;
-
 }
 
 // compute the result
@@ -73,7 +65,31 @@ function compute() {
     updateDisplay();
 }
 
+// clear all
+acBtn.addEventListener("click", clearAll);
+function clearAll() {
+    currResult = "";
+    upResult = "";
+    opSign = undefined;
+    updateDisplay();
+}
+
+// delete last digit
+delBtn.addEventListener("click", deleteLast);
+function deleteLast() {
+    currResult = currResult.slice(0, -1);
+    updateDisplay();
+}
+
+// update display
 
 
-// clear
-// delete
+function updateDisplay() {
+    if (opSign != null) {
+        upScreen.textContent = `${upResult}${opSign}`
+    }
+    else {
+        upScreen.textContent = upResult;
+    }
+    currScreen.textContent = currResult;
+}

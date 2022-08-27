@@ -6,4 +6,5 @@
 .display {
     border: 1px solid gray;
     background-color: aliceblue;
+    height: 50px;
 }
