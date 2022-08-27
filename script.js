@@ -16,6 +16,7 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.includes(".")) return;
+    if (currResult === "" && e.target.value === "0") return;
     currResult += e.target.textContent;
     updateDisplay()
 }
@@ -26,9 +27,7 @@ opBtns.forEach(opBtn => {
 })
 function chooseOp(e) {
     if (currResult === "") return;
-    if (upResult !== "") {
-        operate();
-    }
+    if (upResult !== "") operate();
     upResult = currResult;
     currScreen.textContent = "";
     currResult = "";
