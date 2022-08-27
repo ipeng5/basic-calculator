@@ -15,7 +15,7 @@ body {
 
 .display {
     grid-column: 1 / -1;
-    background-color: rgba(85, 84, 84, 0.45);
+    background-color: rgba(73, 73, 73, 0.705);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -48,7 +48,7 @@ p {
     align-content: center;
     min-height: 100vh;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: 140px 100px 100px 100px 100px 100px;
+    grid-template-rows: minmax(140px, auto) repeat(5, 100px);
 }
 
 .container>button {

@@ -96,15 +96,9 @@ function updateDisplay() {
     else {
         upScreen.textContent = upResult;
     }
-    if (currResult.length > 6 && currResult.includes(".")) {
-        currScreen.textContent = roundResult(currResult);
-    }
-    else { currScreen.textContent = currResult; }
+
+    currScreen.textContent = currResult;
 }
 
-// keep 6 decimals
-function roundResult(num) {
-    return Math.round(num * 1000000) / 1000000;
-}
 
 
