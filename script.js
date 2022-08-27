@@ -16,7 +16,9 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.includes(".")) return;
-    if (currResult === "" && e.target.value === "0") return;
+    if (currResult === "0" && e.target.value !== ".") {
+        currResult = e.target.textContent.slice(1);
+    };
     currResult += e.target.textContent;
     updateDisplay()
 }
@@ -59,7 +61,7 @@ function operate() {
         case "*":
             computation = parseFloat(upResult) * parseFloat(currResult);
             break;
-        case "÷":
+        case "/":
             computation = parseFloat(upResult) / parseFloat(currResult);
             break;
         default: return;
@@ -94,6 +96,15 @@ function updateDisplay() {
     else {
         upScreen.textContent = upResult;
     }
-    currScreen.textContent = currResult;
+    if (currResult.length > 6 && currResult.includes(".")) {
+        currScreen.textContent = roundResult(currResult);
+    }
+    else { currScreen.textContent = currResult; }
 }
+
+// keep 6 decimals
+function roundResult(num) {
+    return Math.round(num * 1000000) / 1000000;
+}
+
 
