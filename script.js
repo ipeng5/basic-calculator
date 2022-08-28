@@ -16,6 +16,7 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.includes(".")) return;
+    if (currResult.length >= 14) return;
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
@@ -99,8 +100,11 @@ function updateDisplay() {
     else {
         upScreen.textContent = upResult;
     }
-
-    currScreen.textContent = currResult;
+    if (currResult.length <= 14) {
+        currScreen.textContent = currResult;
+    } else {
+        currScreen.textContent = currResult.toString().slice(0, 14) + "...";
+    }
 }
 
 
