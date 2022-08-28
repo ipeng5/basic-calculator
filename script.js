@@ -17,7 +17,6 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.toString().includes(".")) return;
-    if (currResult.toString().length >= 10 && lastClick === "null") return;
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
@@ -82,7 +81,7 @@ function operate() {
 }
 
 function roundResult(number) {
-    return Math.round(number * 100000) / 100000
+    return Math.round(number * 1000000000) / 1000000000
 }
 
 
