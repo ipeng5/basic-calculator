@@ -10,7 +10,7 @@ let currScreen = document.querySelector("#current-screen")
 let currResult = "";
 let opSign;
 
-// appendNum(num) - when click a number, it adds to the current screen
+// Append numbers when number buttons are clicked
 numBtns.forEach(numBtn => {
     numBtn.addEventListener("click", appendNum);
 })
@@ -19,11 +19,14 @@ function appendNum(e) {
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
+    if (currResult === ".") {
+        currResult = "0."
+    }
     currResult += e.target.textContent;
     updateDisplay()
 }
 
-// choose operations
+// Choose operations based on input
 opBtns.forEach(opBtn => {
     opBtn.addEventListener("click", chooseOp);
 })
@@ -37,7 +40,7 @@ function chooseOp(e) {
     updateDisplay()
 }
 
-// compute the result
+// Compute the result
 equalBtn.addEventListener("click", operate);
 function operate() {
     let computation;
@@ -72,7 +75,7 @@ function operate() {
     updateDisplay();
 }
 
-// clear all
+// Clear all current data
 acBtn.addEventListener("click", clearAll);
 function clearAll() {
     currResult = "";
@@ -81,14 +84,14 @@ function clearAll() {
     updateDisplay();
 }
 
-// delete last digit
+// Delete last digit from current screen
 delBtn.addEventListener("click", deleteLast);
 function deleteLast() {
     currResult = currResult.slice(0, -1);
     updateDisplay();
 }
 
-// update display
+// Update current screen and upper screen
 function updateDisplay() {
     if (opSign != null) {
         upScreen.textContent = `${upResult}${opSign}`
