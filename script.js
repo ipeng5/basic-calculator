@@ -9,22 +9,27 @@ let upResult = "";
 let currScreen = document.querySelector("#current-screen")
 let currResult = "";
 let opSign;
+let lastClick = "";
 
 // Append numbers when number buttons are clicked
 numBtns.forEach(numBtn => {
     numBtn.addEventListener("click", appendNum);
 })
 function appendNum(e) {
-    if (e.target.textContent === "." && currResult.includes(".")) return;
-    if (currResult.toString().length >= 14) return;
+    if (e.target.textContent === "." && currResult.toString().includes(".")) return;
+    if (currResult.toString().length >= 14 && lastClick === "null") return;
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
     if (currResult === ".") {
-        currResult = "0."
+        currResult = "0.";
     }
+    if (lastClick === "equal") {
+        currResult = "";
+    };
     currResult += e.target.textContent;
-    updateDisplay()
+    updateDisplay();
+    lastClick = "number";
 }
 
 // Choose operations based on input
@@ -38,7 +43,8 @@ function chooseOp(e) {
     currScreen.textContent = "";
     currResult = "";
     opSign = e.target.value;
-    updateDisplay()
+    updateDisplay();
+    lastClick = "operator";
 }
 
 // Compute the result
@@ -72,6 +78,7 @@ function operate() {
     opSign = undefined;
     upResult = ""
     updateDisplay();
+    lastClick = "equal";
 }
 
 // Clear all current data
@@ -81,21 +88,22 @@ function clearAll() {
     upResult = "";
     opSign = undefined;
     updateDisplay();
+    lastClick = "clear";
 }
 
 // Delete last digit from current screen
 delBtn.addEventListener("click", deleteLast);
 function deleteLast() {
-    currResult = currResult.slice(0, -1);
+    currResult = currResult.toString().slice(0, -1);
     updateDisplay();
+    lastClick = "delete";
 }
 
 // Update current screen and upper screen
 function updateDisplay() {
     if (opSign != null) {
         upScreen.textContent = `${upResult}${opSign}`
-    }
-    else {
+    } else {
         upScreen.textContent = upResult;
     }
     if (currResult.toString().length <= 14) {
@@ -103,6 +111,7 @@ function updateDisplay() {
     } else {
         currScreen.textContent = currResult.toString().slice(0, 14) + "...";
     }
+    lastClick = "equal";
 }
 
 
