@@ -16,7 +16,7 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.includes(".")) return;
-    if (currResult.length >= 14) return;
+    if (currResult.toString().length >= 14) return;
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
@@ -45,9 +45,7 @@ function chooseOp(e) {
 equalBtn.addEventListener("click", operate);
 function operate() {
     let computation;
-    const prev = parseFloat(upResult);
-    const curr = parseFloat(currResult);
-    if (isNaN(prev) || isNaN(curr)) return;
+    if (isNaN(parseFloat(upResult)) || isNaN(parseFloat(currResult))) return;
     if (opSign === "/" && currResult === "0") {
         currScreen.textContent = "ERROR";
         upScreen.textContent = "";
@@ -100,7 +98,7 @@ function updateDisplay() {
     else {
         upScreen.textContent = upResult;
     }
-    if (currResult.length <= 14) {
+    if (currResult.toString().length <= 14) {
         currScreen.textContent = currResult;
     } else {
         currScreen.textContent = currResult.toString().slice(0, 14) + "...";
