@@ -81,7 +81,7 @@ function operate() {
 }
 
 function roundResult(number) {
-    return Math.round(number * 100000000) / 100000000
+    return Math.round(number * 1000000000000000) / 1000000000000000
 }
 
 
