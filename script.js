@@ -17,7 +17,7 @@ numBtns.forEach(numBtn => {
 })
 function appendNum(e) {
     if (e.target.textContent === "." && currResult.toString().includes(".")) return;
-    if (currResult.toString().length >= 14 && lastClick === "null") return;
+    if (currResult.toString().length >= 10 && lastClick === "null") return;
     if (currResult === "0" && e.target.value !== ".") {
         currResult = e.target.textContent.slice(1);
     };
@@ -74,12 +74,17 @@ function operate() {
             break;
         default: return;
     }
-    currResult = computation;
+    currResult = roundResult(computation);
     opSign = undefined;
     upResult = ""
     updateDisplay();
     lastClick = "equal";
 }
+
+function roundResult(number) {
+    return Math.round(number * 100000) / 100000
+}
+
 
 // Clear all current data
 acBtn.addEventListener("click", clearAll);
@@ -106,10 +111,10 @@ function updateDisplay() {
     } else {
         upScreen.textContent = upResult;
     }
-    if (currResult.toString().length <= 14) {
+    if (currResult.toString().length <= 10) {
         currScreen.textContent = currResult;
     } else {
-        currScreen.textContent = currResult.toString().slice(0, 14) + "...";
+        currScreen.textContent = currResult.toString().slice(0, 10) + "...";
     }
     lastClick = "equal";
 }
