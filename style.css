@@ -20,7 +20,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 10px 15px 10px 15px;
+    padding: 10px;
     word-wrap: break-word;
     word-break: break-all;
 
